@@ -8,17 +8,17 @@ adc = Adafruit_ADS1x15.ADS1115()
 # Gain for ADC
 GAIN = 1
 
-zeroWindAdjustment =  .2; # Negative numbers yield smaller wind speeds and vice versa.
-int TMP_Therm_ADunits;    # Temp termistor value from wind sensor
-float RV_Wind_ADunits;    # RV output from wind sensor 
-float RV_Wind_Volts;
-long lastMillis;
-int TempCtimes100;
-float zeroWind_ADunits;
-float zeroWind_volts;
-float WindSpeed_MPH;
-float WindSpeed_MetresPerSecond;
-float VolFlowRate; 
+zeroWindAdjustment =  .2 # Negative numbers yield smaller wind speeds and vice versa.
+TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
+RV_Wind_ADunits = 0.0    # RV output from wind sensor 
+RV_Wind_Volts = 0.0
+lastMillis = 0
+TempCtimes100 = 0
+zeroWind_ADunits = 0.0
+zeroWind_volts = 0.0
+WindSpeed_MPH = 0.0
+WindSpeed_MetresPerSecond = 0.0
+VolFlowRate = 0.0
 
 
 print('Reading ADS1x15 values, press Ctrl-C to quit...')
