@@ -8,7 +8,7 @@ adc = Adafruit_ADS1x15.ADS1115()
 # Gain for ADC
 GAIN = 1
 
-float zeroWindAdjustment =  .2; # Negative numbers yield smaller wind speeds and vice versa.
+zeroWindAdjustment =  .2; # Negative numbers yield smaller wind speeds and vice versa.
 int TMP_Therm_ADunits;    # Temp termistor value from wind sensor
 float RV_Wind_ADunits;    # RV output from wind sensor 
 float RV_Wind_Volts;
