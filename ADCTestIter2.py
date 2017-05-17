@@ -55,7 +55,7 @@ while True:
     print (RV_Wind_Volts - zeroWind_Volts)
 
     # Wind speed in MPH
-    WindSpeed_MPH = ((RV_Wind_Volts - zeroWind_Volts)/0.2300)**2.7265
+    WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
     WindSpeed_MetresPerSecond = WindSpeedMPH * 0.44704
     VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
 
