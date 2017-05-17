@@ -36,13 +36,13 @@ Volume = 0
 
 # Read all the ADC channel values in a list.
 readValues = [0]*4
-printList = [0]*7
-headerList = ["Volume (m^3)", "RV Wind AD", "Temp V", "RV V", "Temp (C)", "WSpeed (m/s)", "Vol. flow (m^3/s)"]
+printList = [0]*4
+headerList = ["Volume (m^3)", "Vol. flow (m^3/s)", "WSpeed (m/s)", "Temp (C)"]
 
 print ("Integration V1")
 
 # Print column headers
-print('| {0:>7} | {1:>7} | {2:>7} | {3:>7} | {4:>7} | {5:>7} | {6:>7} |'.format(*headerList))
+print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*headerList))
 print('-' * 37)
 
 ### --> SETUP END
@@ -84,18 +84,15 @@ while True:
         
         # For subsequent print
         printList[0] = Volume
-        printList[1] = RV_Wind_ADunits
-        printList[2] = TMP_Therm_ADunits * 0.0048828125
-        printList[3] = RV_Wind_Volts
-        printList[4] = TempCtimes100/100
-        printList[5] = WindSpeed_MetresPerSecond
-        printList[6] = VolFlowRate
+        printList[1] = VolFlowRate
+        printList[2] = WindSpeed_MetresPerSecond
+        printList[3] = TempCtimes100/100
         
         lastMillis = millis()
 
     
     # Print the ADC values.
-    print('| {0:>7} | {1:>7} | {2:>7} | {3:>7} | {4:>7} | {5:>7} | {6:>7} |'.format(*printList))
+    print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*printList))
     
 ### --> LOOP END
 
