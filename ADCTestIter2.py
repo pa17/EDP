@@ -22,27 +22,26 @@ WindSpeed_MetresPerSecond = 0.0
 VolFlowRate = 0.0
 
 # Read all the ADC channel values in a list.
-values = [0]*4
-scaledvalues = [0]*4
+readValues = [0]*4
 printList = [0]*4
-headerList = ["RV Volts", "zeroWind Volts", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
+headerList = ["RV Volts", "zeroWind Volts", "Temperature", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
 
 print('Reading ADS1x15 values from Wind sensor, press Ctrl-C to quit...')
 # Print nice channel column headers.
-print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*headerList))
+print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>6} |'.format(*headerList))
 print('-' * 37)
 # Main loop.
 while True:
 
     for i in range(4):
         # Read the specified ADC channel using the previously set gain value.
-        values[i] = adc.read_adc(i, gain=GAIN)
-        scaledvalues[i] = values[i]*0.01561 # Values scaled to 10 bit so that
+        readValues[i] = adc.read_adc(i, gain=GAIN)
+        readValues[i] = readValues[i]*0.01561 # Values scaled to 10 bit so that Arduino code can be adapted
         
     # Temp reading
-    TMP_Therm_ADunits = scaledvalues[0]
+    TMP_Therm_ADunits = readValues[0]
     # RV reading
-    RV_Wind_ADunits = scaledvalues[1]
+    RV_Wind_ADunits = readValues[1]
     RV_Wind_Volts = (RV_Wind_ADunits * 0.0048828125)
     # Calculate temperature
     TempCtimes100 = (0.005*TMP_Therm_ADunits*TMP_Therm_ADunits) - 16.862*TMP_Therm_ADunits + 9075.4
@@ -71,9 +70,10 @@ while True:
     printList[1] = zeroWind_Volts
     printList[2] = WindSpeed_MetresPerSecond
     printList[3] = VolFlowRate
+    printList[4] = TempCtimes100
     
     # Print the ADC values.
-    print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*printList))
+    print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>6} |'.format(*printList))
     #print VolFlowRate
     # Pause for half a second.
     time.sleep(0.5)
