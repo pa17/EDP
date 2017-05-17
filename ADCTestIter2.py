@@ -49,6 +49,11 @@ while True:
         zeroWind_Volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment
         
         #DEBUG
+        print ("RV Wind")
+        print (RV_Wind_Volts)
+        print ("zero Wind")
+        print (zeroWind_Volts)        
+        print ("Difference")
         print (RV_Wind_Volts - zeroWind_Volts)
         
         # Wind speed in MPH
