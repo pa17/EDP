@@ -68,9 +68,10 @@ while True:
 
     printList[0] = RV_Wind_Volts
     printList[1] = zeroWind_Volts
-    printList[2] = WindSpeed_MetresPerSecond
-    printList[3] = VolFlowRate
-    printList[4] = TempCtimes100
+    printList[2] = TempCtimes100
+    printList[3] = WindSpeed_MetresPerSecond
+    printList[4] = VolFlowRate
+
     
     # Print the ADC values.
     print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>6} |'.format(*printList))
