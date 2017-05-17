@@ -22,7 +22,7 @@ VolFlowRate = 0.0
 
 # Read all the ADC channel values in a list.
 readValues = [0]*4
-printList = [0]*5
+printList = [0]*7
 headerList = ["Temp AD", "RV Wind AD", "Temp V", "RV V", "Temp (C)", "WSpeed (m/s)", "Vol. flow (m^3/s)"]
 
 print('Reading ADS1x15 values from Wind sensor, press Ctrl-C to quit...')
