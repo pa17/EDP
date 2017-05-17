@@ -79,7 +79,7 @@ while True:
         VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
         
         toc = millis()
-        Volume += (toc-tic)*VolFlowRate
+        Volume += ((toc-tic)/1000)*VolFlowRate
         tic = millis()
         
         # For subsequent print
