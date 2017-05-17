@@ -55,9 +55,11 @@ while True:
     print (RV_Wind_Volts - zeroWind_Volts)
 
     # Wind speed in MPH
-    WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
-    WindSpeed_MetresPerSecond = WindSpeedMPH * 0.44704
-    VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
+    if (RV_Wind_Volts >= zeroWind_Volts):
+        WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
+        WindSpeed_MetresPerSecond = WindSpeedMPH * 0.44704
+        VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
+    
 
     printList[0] = TMP_Therm_ADunits
     printList[1] = RV_Wind_ADunits
