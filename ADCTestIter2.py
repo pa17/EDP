@@ -23,7 +23,7 @@ VolFlowRate = 0.0
 # Read all the ADC channel values in a list.
 readValues = [0]*4
 printList = [0]*5
-headerList = ["RV Volts", "zeroWind Volts", "Temperature", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
+headerList = ["Temp AD", "RV Wind AD", "Temperature", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
 
 print('Reading ADS1x15 values from Wind sensor, press Ctrl-C to quit...')
 # Print nice channel column headers.
@@ -65,8 +65,8 @@ while True:
     except:
         pass
 
-    printList[0] = RV_Wind_Volts
-    printList[1] = zeroWind_Volts
+    printList[0] = TMP_Therm_ADunits
+    printList[1] = RV_Wind_ADunits
     printList[2] = TempCtimes100/100
     printList[3] = WindSpeed_MetresPerSecond
     printList[4] = VolFlowRate
