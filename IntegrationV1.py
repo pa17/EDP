@@ -19,7 +19,7 @@ def millis():
 GAIN = 1
 
 ## VARIABLES
-samplingfrequency = 60 # Hz
+samplingfrequency = 120 # Hz
 samplingperiod = 1 / samplingfrequency 
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
