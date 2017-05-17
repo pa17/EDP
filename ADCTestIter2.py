@@ -9,7 +9,7 @@ adc = Adafruit_ADS1x15.ADS1115()
 # Gain for ADC
 GAIN = 1
 
-zeroWindAdjustment =  .1 # Negative numbers yield smaller wind speeds and vice versa.
+zeroWindAdjustment =  -0.1 # Negative numbers yield smaller wind speeds and vice versa.
 TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
 RV_Wind_ADunits = 0.0    # RV output from wind sensor 
 RV_Wind_Volts = 0.0
@@ -25,10 +25,11 @@ VolFlowRate = 0.0
 values = [0]*4
 scaledvalues = [0]*4
 printList = [0]*4
+headerList == ["RV Volts", "zeroWind Volts", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
 
 print('Reading ADS1x15 values from Wind sensor, press Ctrl-C to quit...')
 # Print nice channel column headers.
-print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*range(4)))
+print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*headerList))
 print('-' * 37)
 # Main loop.
 while True:
