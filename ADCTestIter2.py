@@ -25,7 +25,7 @@ VolFlowRate = 0.0
 values = [0]*4
 scaledvalues = [0]*4
 printList = [0]*4
-headerList == ["RV Volts", "zeroWind Volts", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
+headerList = ["RV Volts", "zeroWind Volts", "Windspeed (m/s)", "Volumetric flow rate (m^3/s)"]
 
 print('Reading ADS1x15 values from Wind sensor, press Ctrl-C to quit...')
 # Print nice channel column headers.
