@@ -57,9 +57,12 @@ while True:
         print (RV_Wind_Volts - zeroWind_Volts)
         
         # Wind speed in MPH
-        WindSpeed_MPH = ((RV_Wind_Volts - zeroWind_Volts)/0.2300)**2.7265
-        WindSpeed_MetresPerSecond = WindSpeedMPH * 0.44704
-        VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
+        try:
+            WindSpeed_MPH = ((RV_Wind_Volts - zeroWind_Volts)/0.2300)**2.7265
+            WindSpeed_MetresPerSecond = WindSpeedMPH * 0.44704
+            VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
+        except:
+            pass
         
     # Print the ADC values.
     print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*scaledvalues))
