@@ -37,7 +37,7 @@ Volume = 0
 # Read all the ADC channel values in a list.
 readValues = [0]*4
 printList = [0]*7
-headerList = ["Temp AD", "RV Wind AD", "Temp V", "RV V", "Temp (C)", "WSpeed (m/s)", "Vol. flow (m^3/s)"]
+headerList = ["Volume (m^3)", "RV Wind AD", "Temp V", "RV V", "Temp (C)", "WSpeed (m/s)", "Vol. flow (m^3/s)"]
 
 print ("Integration V1")
 
@@ -83,7 +83,7 @@ while True:
         tic = millis()
         
         # For subsequent print
-        printList[0] = TMP_Therm_ADunits
+        printList[0] = Volume
         printList[1] = RV_Wind_ADunits
         printList[2] = TMP_Therm_ADunits * 0.0048828125
         printList[3] = RV_Wind_Volts
