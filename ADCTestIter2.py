@@ -35,7 +35,7 @@ while True:
     for i in range(4):
         # Read the specified ADC channel using the previously set gain value.
         readValues[i] = adc.read_adc(i, gain=GAIN)
-        readValues[i] = readValues[i]*0.01561 # Values scaled to 10 bit so that Arduino code can be adapted
+        readValues[i] = readValues[i]*0.025568 # Values scaled to 10 bit so that Arduino code can be adapted
         
     # Temp reading
     TMP_Therm_ADunits = readValues[0]
