@@ -90,7 +90,8 @@ print ("Integration V2")
 
 ### LOOP
 
-pw = pg.plot()
+WindSpeedPlot = pg.plot()
+VolumePlot = pg.plot()
 
 while True:
     # Get values from sensor
@@ -101,15 +102,12 @@ while True:
     VolFlowPlot.append(VolFlowRead)
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
-    
+    # Sums of dt is time
     TimePlot.append(sum(dtPlot))
     
-    ##DEBUG
-    
-    print dtPlot
-    
     # Plot
-    pw.plot(TimePlot, WSPlot, clear=True)
+    WindSpeedPlot.plot(TimePlot, WSPlot, clear=True)
+    VolumePlot.plot(TimePlot, VolPlot, clear=True)
     pg.QtGui.QApplication.processEvents()
     
     
