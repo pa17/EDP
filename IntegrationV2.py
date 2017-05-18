@@ -1,5 +1,6 @@
 ## IMPORTS
-
+# Pyqtgraph
+import pyqtgraph as pg
 # Import time
 import time
 # Import the ADS1x15 module.
@@ -13,43 +14,7 @@ adc = Adafruit_ADS1x15.ADS1115()
 def millis():
     return time.time() * 1000
 
-### SETUP
-
-# Gain for ADC
-GAIN = 1
-
-## VARIABLES
-samplingfrequency = 120 # Hz
-samplingperiod = 1 / samplingfrequency 
-zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
-TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
-RV_Wind_ADunits = 0.0    # RV output from wind sensor 
-RV_Wind_Volts = 0.0
-TempCtimes100 = 0
-zeroWind_ADunits = 0.0
-zeroWind_Volts = 0.0
-WindSpeed_MPH = 0.0
-WindSpeed_MetresPerSecond = 0.0
-VolFlowRate = 0.0
-lastMillis = 0
-Volume = 0
-
-# Read all the ADC channel values in a list.
-readValues = [0]*4
-printList = [0]*4
-headerList = ["Volume (m^3)", "Vol. flow (m^3/s)", "WSpeed (m/s)", "Temp (C)"]
-
-print ("Integration V1")
-
-# Print column headers
-print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*headerList))
-print('-' * 37)
-
-### --> SETUP END
-
-### LOOP
-
-while True:
+def getValues():
     tic = millis()
     if ((millis() - lastMillis) > samplingperiod):
         
@@ -79,19 +44,66 @@ while True:
         VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
         
         toc = millis()
-        Volume += ((toc-tic)/1000)*VolFlowRate
+        dt = (toc-tic)/1000
+        Volume += dt*VolFlowRate
         tic = millis()
-        
-        # For subsequent print
-        printList[0] = Volume
-        printList[1] = VolFlowRate
-        printList[2] = WindSpeed_MetresPerSecond
-        printList[3] = TempCtimes100/100
-        
-        lastMillis = millis()
-
     
-    # Print the ADC values.
-    print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*printList))
+    return Volume, VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100), dt
+    
+
+### SETUP
+
+# Gain for ADC
+GAIN = 1
+
+## VARIABLES
+samplingfrequency = 120 # Hz
+samplingperiod = 1 / samplingfrequency 
+zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
+TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
+RV_Wind_ADunits = 0.0    # RV output from wind sensor 
+RV_Wind_Volts = 0.0
+TempCtimes100 = 0
+zeroWind_ADunits = 0.0
+zeroWind_Volts = 0.0
+WindSpeed_MPH = 0.0
+WindSpeed_MetresPerSecond = 0.0
+VolFlowRate = 0.0
+lastMillis = 0
+Volume = 0
+
+# Initialise lists for subequent plotting
+dtPlot = []
+WSPlot = []
+VolFlowPlot = []
+VolPlot = []
+TempPlot = []
+
+# Read all the ADC channel values in a list.
+readValues = [0]*4
+printList = [0]*4
+headerList = ["Volume (m^3)", "Vol. flow (m^3/s)", "WSpeed (m/s)", "Temp (C)"]
+
+print ("Integration V1")
+
+# Print column headers
+print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*headerList))
+print('-' * 37)
+
+### --> SETUP END
+
+### LOOP
+
+while True:
+    # Get values from sensor
+    VolRead, VolFlowRead, WSRead, TempRead, dtRead = getValues()
+    # Append to plot lists
+    dtPlot.append(dtRead)
+    TempPlot.append(TempRead)
+    VolFlowPlot.append(VolFlowRead)
+    VolPlot.append(VolRead)
+    WSPlot.append(WSRead)
+    pg.plot(dtRead, VolRead)
+    
     
 ### --> LOOP END
