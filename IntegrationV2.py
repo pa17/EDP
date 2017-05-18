@@ -100,6 +100,12 @@ while True:
     VolFlowPlot.append(VolFlowRead)
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
+    
+    ##DEBUG
+    
+    print dtPlot
+    
+    # Plot
     pw.plot(dtPlot, WSPlot, clear=True)
     pg.QtGui.QApplication.processEvents()
     
