@@ -102,7 +102,7 @@ while True:
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
     
-    TimePlot.append = sum(dtPlot)
+    TimePlot.append(sum(dtPlot))
     
     ##DEBUG
     
