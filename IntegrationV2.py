@@ -82,14 +82,8 @@ TempPlot = []
 
 # Read all the ADC channel values in a list.
 readValues = [0]*4
-printList = [0]*4
-headerList = ["Volume (m^3)", "Vol. flow (m^3/s)", "WSpeed (m/s)", "Temp (C)"]
 
-print ("Integration V1")
-
-# Print column headers
-print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} |'.format(*headerList))
-print('-' * 37)
+print ("Integration V2")
 
 ### --> SETUP END
 
@@ -104,7 +98,7 @@ while True:
     VolFlowPlot.append(VolFlowRead)
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
-    pg.plot(dtRead, VolRead)
+    pg.plot(dtPlot, VolPlot)
     
     
 ### --> LOOP END
