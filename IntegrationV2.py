@@ -15,6 +15,7 @@ def millis():
     return time.time() * 1000
 
 def getValues():
+    global Volume
     tic = millis()
     if ((millis() - lastMillis) > samplingperiod):
         
