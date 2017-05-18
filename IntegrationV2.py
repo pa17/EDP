@@ -89,6 +89,8 @@ print ("Integration V2")
 
 ### LOOP
 
+pw = pg.plot()
+
 while True:
     # Get values from sensor
     VolRead, VolFlowRead, WSRead, TempRead, dtRead = getValues()
@@ -98,7 +100,9 @@ while True:
     VolFlowPlot.append(VolFlowRead)
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
-    pg.plot(dtPlot, VolPlot)
+    pw.plot(dtPlot, WSPlot, clear=True)
+    pg.QtGui.QApplication.processEvents()
+    
     
     
 ### --> LOOP END
