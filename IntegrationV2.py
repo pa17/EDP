@@ -79,6 +79,7 @@ WSPlot = []
 VolFlowPlot = []
 VolPlot = []
 TempPlot = []
+TimePlot = []
 
 # Read all the ADC channel values in a list.
 readValues = [0]*4
@@ -101,12 +102,14 @@ while True:
     VolPlot.append(VolRead)
     WSPlot.append(WSRead)
     
+    TimePlot.append = sum(dtPlot)
+    
     ##DEBUG
     
     print dtPlot
     
     # Plot
-    pw.plot(dtPlot, WSPlot, clear=True)
+    pw.plot(TimePlot, WSPlot, clear=True)
     pg.QtGui.QApplication.processEvents()
     
     
