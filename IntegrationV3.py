@@ -105,7 +105,7 @@ while True:
     Volume += dt*VolFlowRead
     tic = millis() # Measure time from here to toc again --> a complete cycle
     # Append to plot lists
-    dtPlot.append(dtRead)
+    dtPlot.append(dt)
     TempPlot.append(TempRead)
     VolFlowPlot.append(VolFlowRead)
     VolPlot.append(Volume)
