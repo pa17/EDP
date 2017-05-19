@@ -120,7 +120,7 @@ while True:
     
     # Volume plot
     VolumePlot.plot(TimePlot, VolPlot, clear=True, title="Volume vs. time")
-    VolumePlot.setLabel('left', "Volume", units='m^3/s')
+    VolumePlot.setLabel('left', "Volume", units='m^3')
     VolumePlot.setLabel('bottom', "Time", units='s')
     pg.QtGui.QApplication.processEvents()
     
