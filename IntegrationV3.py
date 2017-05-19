@@ -115,13 +115,13 @@ while True:
     
     # Wind speed plot
     WindSpeedPlot.plot(TimePlot, WSPlot, clear=True, title="Breath speed vs. time")
-    WindSpeedPlot.setLabel('left', "Flow speed (m/s)", units='A')
-    WindSpeedPlot.setLabel('bottom', "Time (s)", units='A')
+    WindSpeedPlot.setLabel('left', "Flow speed", units='m/s')
+    WindSpeedPlot.setLabel('bottom', "Time", units='s')
     
     # Volume plot
     VolumePlot.plot(TimePlot, VolPlot, clear=True, title="Volume vs. time")
-    VolumePlot.setLabel('left', "Volume (m^3/s)", units='A')
-    VolumePlot.setLabel('bottom', "Time (s)", units='A')
+    VolumePlot.setLabel('left', "Volume", units='m^3/s')
+    VolumePlot.setLabel('bottom', "Time", units='s')
     pg.QtGui.QApplication.processEvents()
     
     
