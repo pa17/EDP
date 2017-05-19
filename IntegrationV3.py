@@ -15,6 +15,9 @@ def millis():
     return time.time() * 1000
 
 def getValues():
+    # Needed to initialise outside of function to zero otherwise keeps reseting itself
+    global lastMillis
+    
     if ((millis() - lastMillis) > samplingperiod):
         
         # ADC readings
@@ -66,7 +69,7 @@ zeroWind_Volts = 0.0
 WindSpeed_MPH = 0.0
 WindSpeed_MetresPerSecond = 0.0
 VolFlowRate = 0.0
-lastMillis = 0
+global lastMillis = 0
 Volume = 0
 
 # Initialise lists for subequent plotting
