@@ -98,7 +98,7 @@ tic = millis()
 
 while True:
     # Get values from sensor
-    VolFlowRead, WSRead, TempRead, dtRead = getValues()
+    VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
     toc = millis()
     dt = (toc-tic)/1000 # Time increment in seconds
