@@ -15,8 +15,6 @@ def millis():
     return time.time() * 1000
 
 def getValues():
-    global Volume
-    tic = millis()
     if ((millis() - lastMillis) > samplingperiod):
         
         # ADC readings
@@ -43,13 +41,11 @@ def getValues():
 
         WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704
         VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
-        
-        toc = millis()
-        dt = (toc-tic)/1000
-        Volume += dt*VolFlowRate
-        tic = millis()
     
-    return Volume, VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100), dt
+    # Calculate how much time has passed since last sample
+    lastMillis = millis()
+    
+    return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
     
 
 ### SETUP
@@ -59,7 +55,7 @@ GAIN = 1
 
 ## VARIABLES
 samplingfrequency = 120 # Hz
-samplingperiod = 1 / samplingfrequency 
+samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
 RV_Wind_ADunits = 0.0    # RV output from wind sensor 
@@ -84,7 +80,7 @@ TimePlot = []
 # Read all the ADC channel values in a list.
 readValues = [0]*4
 
-print ("Integration V2")
+print ("Integration V3")
 
 ### --> SETUP END
 
@@ -93,14 +89,22 @@ print ("Integration V2")
 WindSpeedPlot = pg.plot()
 VolumePlot = pg.plot()
 
+# Need one tic to start with
+tic = millis()
+
 while True:
     # Get values from sensor
-    VolRead, VolFlowRead, WSRead, TempRead, dtRead = getValues()
+    VolFlowRead, WSRead, TempRead, dtRead = getValues()
+    # Integrate to find volume
+    toc = millis()
+    dt = (toc-tic)/1000 # Time increment in seconds
+    Volume += dt*VolFlowRead
+    tic = millis() # Measure time from here to toc again --> a complete cycle
     # Append to plot lists
     dtPlot.append(dtRead)
     TempPlot.append(TempRead)
     VolFlowPlot.append(VolFlowRead)
-    VolPlot.append(VolRead)
+    VolPlot.append(Volume)
     WSPlot.append(WSRead)
     # Sums of dt is time
     TimePlot.append(sum(dtPlot))
