@@ -69,7 +69,8 @@ zeroWind_Volts = 0.0
 WindSpeed_MPH = 0.0
 WindSpeed_MetresPerSecond = 0.0
 VolFlowRate = 0.0
-global lastMillis = 0
+global lastMillis
+lastMillis = 0.0
 Volume = 0
 
 # Initialise lists for subequent plotting
