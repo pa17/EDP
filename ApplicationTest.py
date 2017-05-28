@@ -78,6 +78,8 @@ def updatePlot():
     #currWS = WSList[-1]
 
     #pg.QtGui.QApplication.processEvents()
+    
+    return WSList, TimeList
 
 ### SETUP
 
@@ -149,6 +151,7 @@ class CustomWidget(QtGui.QWidget):
             enabled = False
             
     def updatePlot(self):
+        print "TIMEOUT"
         updatePlot()
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
