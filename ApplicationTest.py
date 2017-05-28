@@ -35,17 +35,6 @@ TimeList = []
 
 ## FUNCTIONS
 
-'''
-def parse_args():
-    
-    parser = argparse.ArgumentParser(
-        description="Show a pyqtgraph plot embedded in a PyQt UI.")
-    parser.add_argument('-s', '--screenshot', action='store_true',
-        help="Take a screenshot of the UI instead of running it.")
-    args = parser.parse_args()
-    return args
-'''
-
 def getValues():
       
     # ADC readings
@@ -136,17 +125,10 @@ class CustomWidget(QtGui.QWidget):
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
 if __name__ == '__main__':
-    #args = parse_args()
 
     app = QtGui.QApplication([])
     widget = CustomWidget()
-    '''
-    if args.screenshot:
-        pixmap = QtGui.QPixmap(widget.size())
-        widget.render(pixmap)
-        pixmap.save('screenshot.png')
-    else:
-    '''
+
     widget.show()
     app.exec_()
 
