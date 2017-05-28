@@ -144,12 +144,14 @@ class MainPage(QWidget, MainPage.Ui_SimpleButton):
     def __init__(self, parent=None):
         super(MainPage, self).__init__(parent)
         self.setupUi(self)
+        self.ui.plotWidget.plot(x=[0.0, 1.0, 2.0, 3.0], y=[4.4, 2.5, 2.1, 2.2])
+        
+        
         
 app = QApplication(sys.argv)
 form = MainPage()
 form.setFocus()
 form.setWindowTitle("Main Page")
-form.setCentralWidget(WindSpeedPlot)
 form.show()
 app.exec_()
 
