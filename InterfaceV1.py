@@ -49,12 +49,12 @@ def updatePlot():
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    toc = millis()
-    dt = (toc-tic)/1000 # Time increment in seconds
+    #toc = millis()
+    #dt = (toc-tic)/1000 # Time increment in seconds
     Volume += dt*VolFlowRead
-    tic = millis() # Measure time from here to toc again --> a complete cycle
+    #tic = millis() # Measure time from here to toc again --> a complete cycle
     # Append to plot lists
-    dtList.append(dt)
+    dtList.append(samplingperiod)
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
     VolList.append(Volume) 
