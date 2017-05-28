@@ -85,10 +85,7 @@ def updatePlot():
 
     pg.QtGui.QApplication.processEvents()
     
-    try:
-        MainPage.Graph_2.insertTab(0, WindSpeedPlot)
-    except:
-        pass
+    MainPage.Graph_2.insertTab(0, WindSpeedPlot)
     
     return WindSpeedPlot, VolumePlot, VolFlowPlot
 
