@@ -5,7 +5,7 @@ import pyqtgraph as pg # Pyqtgraph
 import time # Import time
 import Adafruit_ADS1x15 # Import the ADS1x15 module.
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
-import mainPage, editPatient, welcomePage # Import UI files
+import MainPage, EditPatient, WelcomePage # Import UI files
 
 ## FUNCTIONS
 
@@ -88,13 +88,13 @@ print ("Interface V1")
 
 ### UI SETUP
 
-class MainPage(QWidget, mainPage.Ui_Dialog):
+class MainPage(QWidget, MainPage.Ui_Dialog):
     def __init__(self, parent=None):
-        super(mainPage, self).__init__(parent)
+        super(MainPage, self).__init__(parent)
         self.setupUi(self)
         
 app = QApplication(sys.argv)
-form = mainPage()
+form = MainPage()
 form.setFocus()
 form.setWindowTitle("Main Page")
 form.show()
