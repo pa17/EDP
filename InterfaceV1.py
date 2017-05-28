@@ -3,6 +3,7 @@
 from PyQt4 import QtCore, QtGui # PyQt4
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import sys
 import pyqtgraph as pg # Pyqtgraph
 import time # Import time
 import Adafruit_ADS1x15 # Import the ADS1x15 module.
