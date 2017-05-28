@@ -63,7 +63,7 @@ def updatePlot():
     # Integrate to find volume
     #toc = millis()
     #dt = (toc-tic)/1000 # Time increment in seconds
-    Volume += samplingperiod*VolFlowRead
+    #Volume += samplingperiod*VolFlowRead
     #tic = millis() # Measure time from here to toc again --> a complete cycle
     # Append to plot lists
     dtList.append(samplingperiod)
