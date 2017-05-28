@@ -141,7 +141,7 @@ class CustomWidget(QtGui.QWidget):
         # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
         self.timer = QTimer()
-        self.timer.timeout.connect(ClassUpdatePlot)
+        self.timer.timeout.connect(self.ClassUpdatePlot)
         self.timer.start(samplingperiod)
 
     def toggleMouse(self, state):
