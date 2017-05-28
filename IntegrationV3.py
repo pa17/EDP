@@ -57,7 +57,7 @@ def getValues():
 GAIN = 1
 
 ## VARIABLES
-samplingfrequency = 120 # Hz
+samplingfrequency = 240 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
