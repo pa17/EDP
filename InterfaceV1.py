@@ -90,7 +90,7 @@ print ("Interface V1")
 
 ### UI SETUP
 
-class MainPage(QWidget, MainPage.Ui_Dialog):
+class MainPage(QWidget, MainPage.UI_SimpleButton):
     def __init__(self, parent=None):
         super(MainPage, self).__init__(parent)
         self.setupUi(self)
