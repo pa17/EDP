@@ -112,7 +112,7 @@ while True:
     VolList.append(Volume) 
     WSList.append(WSRead)
     # Sums of dt is time
-    TimeList.append(sum(dtPlot))
+    TimeList.append(sum(dtList))
     
     # Wind speed plot
     WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
