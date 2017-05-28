@@ -61,10 +61,8 @@ def updatePlot():
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    #toc = millis()
-    #dt = (toc-tic)/1000 # Time increment in seconds
     #Volume += samplingperiod*VolFlowRead
-    #tic = millis() # Measure time from here to toc again --> a complete cycle
+
     # Append to plot lists
     dtList.append(samplingperiod)
     #TempList.append(TempRead)
@@ -73,31 +71,13 @@ def updatePlot():
     WSList.append(WSRead)
     # Sums of dt is time
     TimeList.append(sum(dtList))
-    print TimeList
 
     # Important variables to return
     #currVolume = VolList[-1]
     #currVolFlow = VolFlowList[-1]
     #currWS = WSList[-1]
 
-    # Wind speed plot
-    #WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
-    #WindSpeedPlot.setLabel('left', "Flow speed", units='m/s')
-    #WindSpeedPlot.setLabel('bottom', "Time", units='s')
-
-    # Volume plot
-    #VolumePlot.plot(TimeList, VolList, clear=True, title="Volume vs. time")
-    #VolumePlot.setLabel('left', "Volume", units='m^3')
-    #VolumePlot.setLabel('bottom', "Time", units='s')
-
-    #  Vol. flow rate plot
-    #VolFlowPlot.plot(TimeList, VolFlowList, clear=True, title="Volume vs. time")
-    #VolFlowPlot.setLabel('left', "Volumetric flow rate", units='L/s')
-    #VolFlowPlot.setLabel('bottom', "Time", units='s')
-
-    pg.QtGui.QApplication.processEvents()
-    
-    #MainPage.Ui_SimpleButton.Graph_2.insertTab(0, WindSpeedPlot)
+    #pg.QtGui.QApplication.processEvents()
 
 ### SETUP
 
