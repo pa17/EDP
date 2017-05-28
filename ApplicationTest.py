@@ -142,7 +142,7 @@ print ("Application Test")
 ### UI SETUP
 
 
-timer.start(samplingperiod)
+
 
 
 class CustomWidget(QtGui.QWidget):
@@ -161,6 +161,7 @@ class CustomWidget(QtGui.QWidget):
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
         self.timer = QTimer()
         self.timer.timeout.connect(updatePlot)
+        self.timer.start(samplingperiod)
 
     def toggleMouse(self, state):
         if state == QtCore.Qt.Checked:
