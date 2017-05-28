@@ -141,8 +141,7 @@ print ("Application Test")
 
 ### UI SETUP
 
-timer = QTimer()
-timer.timeout.connect(updatePlot)
+
 timer.start(samplingperiod)
 
 
@@ -160,12 +159,17 @@ class CustomWidget(QtGui.QWidget):
 
         # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
+        self.timer = QTimer()
+        self.timer.timeout.connect(updatePlot)
 
     def toggleMouse(self, state):
         if state == QtCore.Qt.Checked:
             enabled = True
         else:
             enabled = False
+            
+    def updatePlot(self):
+        updatePlot()
 
         self.ui.plotWidget.setMouseEnabled(x=enabled, y=enabled)
 
