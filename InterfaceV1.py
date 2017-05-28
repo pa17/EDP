@@ -137,7 +137,9 @@ WindSpeedPlot = pg.plot()
 VolumePlot = pg.plot()
 VolFlowPlot = pg.plot()
 
-QTimer.singleShot(samplingperiod, []{updatePlot()});
+timer = QTimer()
+timer.timeout.connect(self.updatePlot)
+timer.start(samplingperiod)
 
 class MainPage(QWidget, MainPage.Ui_SimpleButton):
     def __init__(self, parent=None):
