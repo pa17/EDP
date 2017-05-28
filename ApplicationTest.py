@@ -136,7 +136,7 @@ class CustomWidget(QtGui.QWidget):
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
 if __name__ == '__main__':
-    args = parse_args()
+    #args = parse_args()
 
     app = QtGui.QApplication([])
     widget = CustomWidget()
