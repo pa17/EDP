@@ -144,7 +144,7 @@ class MainPage(QWidget, MainPage.Ui_SimpleButton):
     def __init__(self, parent=None):
         super(MainPage, self).__init__(parent)
         self.setupUi(self)
-        self.plotWidget.plot(x=[0.0, 1.0, 2.0, 3.0], y=[4.4, 2.5, 2.1, 2.2])
+        self.PlotWidget.plot(x=[0.0, 1.0, 2.0, 3.0], y=[4.4, 2.5, 2.1, 2.2])
         
         
         
