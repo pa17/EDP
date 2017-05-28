@@ -17,37 +17,31 @@ def millis():
 
 def getValues():
     # Needed to initialise outside of function to zero otherwise keeps reseting itself
-    global lastMillis
-    
-    if ((millis() - lastMillis) > samplingperiod):
         
-        # ADC readings
-        for i in range(4):
-            readValues[i] = adc.read_adc(i, gain=GAIN)
-            readValues[i] = readValues[i]*0.025568 # Values scaled to 10 bit so that Arduino code can be adapted
+    # ADC readings
+    for i in range(4):
+        readValues[i] = adc.read_adc(i, gain=GAIN)
+        readValues[i] = readValues[i]*0.025568 # Values scaled to 10 bit so that Arduino code can be adapted
 
-        # Temp reading / RV reading
-        TMP_Therm_ADunits = readValues[0]
-        RV_Wind_ADunits = readValues[1]
-        RV_Wind_Volts = (RV_Wind_ADunits * 0.0048828125)
-        # Calculate temperature
-        TempCtimes100 = (0.005*TMP_Therm_ADunits*TMP_Therm_ADunits) - 16.862*TMP_Therm_ADunits + 9075.4
-        # Calculate zero wind
-        zeroWind_ADunits = -0.0006*TMP_Therm_ADunits*TMP_Therm_ADunits + 1.0727*TMP_Therm_ADunits + 47.172
-        # Zero wind adjustment
-        zeroWind_Volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment
+    # Temp reading / RV reading
+    TMP_Therm_ADunits = readValues[0]
+    RV_Wind_ADunits = readValues[1]
+    RV_Wind_Volts = (RV_Wind_ADunits * 0.0048828125)
+    # Calculate temperature
+    TempCtimes100 = (0.005*TMP_Therm_ADunits*TMP_Therm_ADunits) - 16.862*TMP_Therm_ADunits + 9075.4
+    # Calculate zero wind
+    zeroWind_ADunits = -0.0006*TMP_Therm_ADunits*TMP_Therm_ADunits + 1.0727*TMP_Therm_ADunits + 47.172
+    # Zero wind adjustment
+    zeroWind_Volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment
 
-        # Wind speed in MPH
-        if (RV_Wind_Volts >= zeroWind_Volts): # Otherwise wind speed must be zero
-            WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
-        else:
-            WindSpeed_MPH = 0.0
+    # Wind speed in MPH
+    if (RV_Wind_Volts >= zeroWind_Volts): # Otherwise wind speed must be zero
+        WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
+    else:
+        WindSpeed_MPH = 0.0
 
-        WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704
-        VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
-    
-    # Calculate how much time has passed since last sample
-    lastMillis = millis()
+    WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704
+    VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
     
     return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
     
