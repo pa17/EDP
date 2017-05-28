@@ -114,6 +114,11 @@ while True:
     # Sums of dt is time
     TimeList.append(sum(dtList))
     
+    # Important variables to return
+    currVolume = VolList[-1]
+    currVolFlow = VolFlowList[-1]
+    currWS = WSList[-1]
+    
     # Wind speed plot
     WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
     WindSpeedPlot.setLabel('left', "Flow speed", units='m/s')
