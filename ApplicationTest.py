@@ -170,6 +170,7 @@ class CustomWidget(QtGui.QWidget):
             
     def updatePlot(self):
         updatePlot()
+        self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
         self.ui.plotWidget.setMouseEnabled(x=enabled, y=enabled)
 
