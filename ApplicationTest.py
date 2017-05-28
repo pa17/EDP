@@ -60,7 +60,6 @@ def updatePlot():
     global TimeList, WSList
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
-    print VolFlowRead
     # Integrate to find volume
     #toc = millis()
     #dt = (toc-tic)/1000 # Time increment in seconds
@@ -74,6 +73,7 @@ def updatePlot():
     WSList.append(WSRead)
     # Sums of dt is time
     TimeList.append(sum(dtList))
+    print TimeList
 
     # Important variables to return
     #currVolume = VolList[-1]
