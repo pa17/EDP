@@ -46,7 +46,7 @@ def getValues():
     return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
     
 def updatePlot():
-    global Volume
+    global Volume, WindSpeedPlot, VolumePlot, VolFLowPlot
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
@@ -85,7 +85,7 @@ def updatePlot():
 
     pg.QtGui.QApplication.processEvents()
     
-    MainPage.Ui_SimpleButton.Graph_2.insertTab(0, WindSpeedPlot)
+    #MainPage.Ui_SimpleButton.Graph_2.insertTab(0, WindSpeedPlot)
     
     return WindSpeedPlot, VolumePlot, VolFlowPlot
 
@@ -131,6 +131,7 @@ print ("Interface V1")
 
 tic = millis() # Need one tic to start with
 
+global WindSpeedPlot, VolumePlot, VolFlowPlot
 WindSpeedPlot = pg.plot()
 VolumePlot = pg.plot()
 VolFlowPlot = pg.plot()
@@ -148,6 +149,7 @@ app = QApplication(sys.argv)
 form = MainPage()
 form.setFocus()
 form.setWindowTitle("Main Page")
+form.setCentralWidget(WindSpeedPlot)
 form.show()
 app.exec_()
 
