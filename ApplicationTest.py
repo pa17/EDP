@@ -7,17 +7,27 @@ import sys
 import pyqtgraph as pg # Pyqtgraph
 import time # Import time
 import Adafruit_ADS1x15 # Import the ADS1x15 module.
+import argparse
+# import the "form class" from your compiled UI
+from template import Ui_CustomWidget
+
+# ADC OBJECT
+
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
-import MainPage, EditPatient, WelcomePage # Import UI files
 
 ## FUNCTIONS
 
-def millis():
-    return time.time() * 1000
+def parse_args():
+    
+    parser = argparse.ArgumentParser(
+        description="Show a pyqtgraph plot embedded in a PyQt UI.")
+    parser.add_argument('-s', '--screenshot', action='store_true',
+        help="Take a screenshot of the UI instead of running it.")
+    args = parser.parse_args()
+    return args
 
 def getValues():
-    # Needed to initialise outside of function to zero otherwise keeps reseting itself
-        
+      
     # ADC readings
     for i in range(4):
         readValues[i] = adc.read_adc(i, gain=GAIN)
@@ -46,7 +56,8 @@ def getValues():
     return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
     
 def updatePlot():
-    global Volume, WindSpeedPlot, VolumePlot, VolFLowPlot
+    
+    global TimeList, WSList
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
@@ -69,19 +80,19 @@ def updatePlot():
     currWS = WSList[-1]
 
     # Wind speed plot
-    WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
-    WindSpeedPlot.setLabel('left', "Flow speed", units='m/s')
-    WindSpeedPlot.setLabel('bottom', "Time", units='s')
+    #WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+    #WindSpeedPlot.setLabel('left', "Flow speed", units='m/s')
+    #WindSpeedPlot.setLabel('bottom', "Time", units='s')
 
     # Volume plot
-    VolumePlot.plot(TimeList, VolList, clear=True, title="Volume vs. time")
-    VolumePlot.setLabel('left', "Volume", units='m^3')
-    VolumePlot.setLabel('bottom', "Time", units='s')
+    #VolumePlot.plot(TimeList, VolList, clear=True, title="Volume vs. time")
+    #VolumePlot.setLabel('left', "Volume", units='m^3')
+    #VolumePlot.setLabel('bottom', "Time", units='s')
 
     #  Vol. flow rate plot
-    VolFlowPlot.plot(TimeList, VolFlowList, clear=True, title="Volume vs. time")
-    VolFlowPlot.setLabel('left', "Volumetric flow rate", units='L/s')
-    VolFlowPlot.setLabel('bottom', "Time", units='s')
+    #VolFlowPlot.plot(TimeList, VolFlowList, clear=True, title="Volume vs. time")
+    #VolFlowPlot.setLabel('left', "Volumetric flow rate", units='L/s')
+    #VolFlowPlot.setLabel('bottom', "Time", units='s')
 
     pg.QtGui.QApplication.processEvents()
     
@@ -123,34 +134,53 @@ TimeList = []
 # Read all the ADC channel values in a list.
 readValues = [0]*4
 
-print ("Interface V1")
+print ("Application Test")
 
 ### --> SETUP END
 
 ### UI SETUP
 
-tic = millis() # Need one tic to start with
-
-global WindSpeedPlot, VolumePlot, VolFlowPlot
-WindSpeedPlot = pg.plot()
-VolumePlot = pg.plot()
-VolFlowPlot = pg.plot()
+global TimeList, WSList
 
 timer = QTimer()
 timer.timeout.connect(updatePlot)
 timer.start(samplingperiod)
 
-class MainPage(QWidget, MainPage.Ui_SimpleButton):
+
+class CustomWidget(QtGui.QWidget):
+
     def __init__(self, parent=None):
-        super(MainPage, self).__init__(parent)
-        self.setupUi(self)
-        self.PlotWidget.plot(x=[0.0, 1.0, 2.0, 3.0], y=[4.4, 2.5, 2.1, 2.2])
-        
-        
-        
-app = QApplication(sys.argv)
-form = MainPage()
-form.setFocus()
-form.setWindowTitle("Main Page")
-form.show()
-app.exec_()
+        super(CustomWidget, self).__init__(parent=parent)
+
+        # set up the form class as a `ui` attribute
+        self.ui = Ui_CustomWidget()
+        self.ui.setupUi(self)
+
+        # access your UI elements through the `ui` attribute
+        self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+
+        # simple demonstration of pure Qt widgets interacting with pyqtgraph
+        self.ui.checkBox.stateChanged.connect(self.toggleMouse)
+
+    def toggleMouse(self, state):
+        if state == QtCore.Qt.Checked:
+            enabled = True
+        else:
+            enabled = False
+
+        self.ui.plotWidget.setMouseEnabled(x=enabled, y=enabled)
+
+if __name__ == '__main__':
+    args = parse_args()
+
+    app = QtGui.QApplication([])
+    widget = CustomWidget()
+
+    if args.screenshot:
+        pixmap = QtGui.QPixmap(widget.size())
+        widget.render(pixmap)
+        pixmap.save('screenshot.png')
+    else:
+        widget.show()
+        app.exec_()
+
