@@ -107,7 +107,8 @@ WindSpeed_MetresPerSecond = 0.0
 VolFlowRate = 0.0
 global lastMillis
 lastMillis = 0.0
-global Volume = 0
+global Volume
+Volume = 0
 
 # Initialise lists for subequent plotting
 dtList = []
