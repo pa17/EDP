@@ -141,7 +141,7 @@ class CustomWidget(QtGui.QWidget):
         # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
         self.timer = QTimer()
-        self.timer.timeout.connect(updatePlot)
+        self.timer.timeout.connect(ClassUpdatePlot)
         self.timer.start(samplingperiod)
 
     def toggleMouse(self, state):
@@ -150,7 +150,7 @@ class CustomWidget(QtGui.QWidget):
         else:
             enabled = False
             
-    def updatePlot(self):
+    def ClassUpdatePlot(self):
         print "TIMEOUT"
         updatePlot()
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
