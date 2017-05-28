@@ -21,17 +21,17 @@ GAIN = 1
 samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
-TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
-RV_Wind_ADunits = 0.0    # RV output from wind sensor 
-RV_Wind_Volts = 0.0
-TempCtimes100 = 0
-zeroWind_ADunits = 0.0
-zeroWind_Volts = 0.0
-WindSpeed_MPH = 0.0
-WindSpeed_MetresPerSecond = 0.0
-VolFlowRate = 0.0
-lastMillis = 0.0
-Volume = 0
+#TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
+#RV_Wind_ADunits = 0.0    # RV output from wind sensor 
+#RV_Wind_Volts = 0.0
+#TempCtimes100 = 0
+#zeroWind_ADunits = 0.0
+#zeroWind_Volts = 0.0
+#WindSpeed_MPH = 0.0
+#WindSpeed_MetresPerSecond = 0.0
+#VolFlowRate = 0.0
+#lastMillis = 0.0
+#Volume = 0
 
 # Initialise lists for subequent plotting
 global TimeList, WSList
