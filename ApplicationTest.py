@@ -13,41 +13,29 @@ from template import Ui_CustomWidget
 
 ### SETUP
 
-# ADC OBJECT
+## ADC 
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
 # Gain for ADC
 GAIN = 1
+# Read all the ADC channel values in a list.
+readValues = [0]*4
+
 ## VARIABLES
 samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
-#TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
-#RV_Wind_ADunits = 0.0    # RV output from wind sensor 
-#RV_Wind_Volts = 0.0
-#TempCtimes100 = 0
-#zeroWind_ADunits = 0.0
-#zeroWind_Volts = 0.0
-#WindSpeed_MPH = 0.0
-#WindSpeed_MetresPerSecond = 0.0
-#VolFlowRate = 0.0
-#lastMillis = 0.0
-#Volume = 0
-
 # Initialise lists for subequent plotting
 global TimeList, WSList
-
 dtList = []
 WSList = []
-#VolFlowList = []
-#VolList = []
-#TempList = []
+VolFlowList = []
+VolList = []
+TempList = []
 TimeList = []
-
-# Read all the ADC channel values in a list.
-readValues = [0]*4
 
 ## FUNCTIONS
 
+'''
 def parse_args():
     
     parser = argparse.ArgumentParser(
@@ -56,6 +44,7 @@ def parse_args():
         help="Take a screenshot of the UI instead of running it.")
     args = parser.parse_args()
     return args
+'''
 
 def getValues():
       
@@ -65,8 +54,8 @@ def getValues():
         readValues[i] = readValues[i]*0.025568 # Values scaled to 10 bit so that Arduino code can be adapted
 
     # Temp reading / RV reading
-    TMP_Therm_ADunits = readValues[0]
-    RV_Wind_ADunits = readValues[1]
+    TMP_Therm_ADunits = readValues[0] # Temp termistor value from wind sensor
+    RV_Wind_ADunits = readValues[1] # RV output from wind sensor 
     RV_Wind_Volts = (RV_Wind_ADunits * 0.0048828125)
     # Calculate temperature
     TempCtimes100 = (0.005*TMP_Therm_ADunits*TMP_Therm_ADunits) - 16.862*TMP_Therm_ADunits + 9075.4
@@ -151,13 +140,14 @@ if __name__ == '__main__':
 
     app = QtGui.QApplication([])
     widget = CustomWidget()
-
+    '''
     if args.screenshot:
         pixmap = QtGui.QPixmap(widget.size())
         widget.render(pixmap)
         pixmap.save('screenshot.png')
     else:
-        widget.show()
-        app.exec_()
+    '''
+    widget.show()
+    app.exec_()
 
 ### --> UI LOOP END
