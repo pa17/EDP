@@ -67,17 +67,17 @@ def updatePlot():
     #tic = millis() # Measure time from here to toc again --> a complete cycle
     # Append to plot lists
     dtList.append(samplingperiod)
-    TempList.append(TempRead)
-    VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
-    VolList.append(Volume) 
+    #TempList.append(TempRead)
+    #VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
+    #VolList.append(Volume) 
     WSList.append(WSRead)
     # Sums of dt is time
     TimeList.append(sum(dtList))
 
     # Important variables to return
-    currVolume = VolList[-1]
-    currVolFlow = VolFlowList[-1]
-    currWS = WSList[-1]
+    #currVolume = VolList[-1]
+    #currVolFlow = VolFlowList[-1]
+    #currWS = WSList[-1]
 
     # Wind speed plot
     #WindSpeedPlot.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
@@ -106,7 +106,7 @@ def updatePlot():
 GAIN = 1
 
 ## VARIABLES
-samplingfrequency = 240 # Hz
+samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
@@ -122,13 +122,14 @@ lastMillis = 0.0
 Volume = 0
 
 # Initialise lists for subequent plotting
+
 global TimeList, WSList
 
 dtList = []
 WSList = []
-VolFlowList = []
-VolList = []
-TempList = []
+#VolFlowList = []
+#VolList = []
+#TempList = []
 TimeList = []
 
 # Read all the ADC channel values in a list.
@@ -139,8 +140,6 @@ print ("Application Test")
 ### --> SETUP END
 
 ### UI SETUP
-
-global TimeList, WSList
 
 timer = QTimer()
 timer.timeout.connect(updatePlot)
