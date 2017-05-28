@@ -138,7 +138,7 @@ VolumePlot = pg.plot()
 VolFlowPlot = pg.plot()
 
 timer = QTimer()
-timer.timeout.connect(self.updatePlot)
+timer.timeout.connect(updatePlot)
 timer.start(samplingperiod)
 
 class MainPage(QWidget, MainPage.Ui_SimpleButton):
