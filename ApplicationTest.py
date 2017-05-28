@@ -11,9 +11,40 @@ import argparse
 # import the "form class" from your compiled UI
 from template import Ui_CustomWidget
 
-# ADC OBJECT
+### SETUP
 
+# ADC OBJECT
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
+# Gain for ADC
+GAIN = 1
+## VARIABLES
+samplingfrequency = 120 # Hz
+samplingperiod = 1000 / samplingfrequency # In milliseconds
+zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
+TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
+RV_Wind_ADunits = 0.0    # RV output from wind sensor 
+RV_Wind_Volts = 0.0
+TempCtimes100 = 0
+zeroWind_ADunits = 0.0
+zeroWind_Volts = 0.0
+WindSpeed_MPH = 0.0
+WindSpeed_MetresPerSecond = 0.0
+VolFlowRate = 0.0
+lastMillis = 0.0
+Volume = 0
+
+# Initialise lists for subequent plotting
+global TimeList, WSList
+
+dtList = []
+WSList = []
+#VolFlowList = []
+#VolList = []
+#TempList = []
+TimeList = []
+
+# Read all the ADC channel values in a list.
+readValues = [0]*4
 
 ## FUNCTIONS
 
@@ -81,50 +112,11 @@ def updatePlot():
     
     return WSList, TimeList
 
-### SETUP
-
-# Gain for ADC
-GAIN = 1
-
-## VARIABLES
-samplingfrequency = 120 # Hz
-samplingperiod = 1000 / samplingfrequency # In milliseconds
-zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
-TMP_Therm_ADunits = 0    # Temp termistor value from wind sensor
-RV_Wind_ADunits = 0.0    # RV output from wind sensor 
-RV_Wind_Volts = 0.0
-TempCtimes100 = 0
-zeroWind_ADunits = 0.0
-zeroWind_Volts = 0.0
-WindSpeed_MPH = 0.0
-WindSpeed_MetresPerSecond = 0.0
-VolFlowRate = 0.0
-lastMillis = 0.0
-Volume = 0
-
-# Initialise lists for subequent plotting
-
-global TimeList, WSList
-
-dtList = []
-WSList = []
-#VolFlowList = []
-#VolList = []
-#TempList = []
-TimeList = []
-
-# Read all the ADC channel values in a list.
-readValues = [0]*4
-
 print ("Application Test")
 
 ### --> SETUP END
 
-### UI SETUP
-
-
-
-
+### UI LOOP
 
 class CustomWidget(QtGui.QWidget):
 
@@ -151,7 +143,6 @@ class CustomWidget(QtGui.QWidget):
             enabled = False
             
     def ClassUpdatePlot(self):
-        print "TIMEOUT"
         updatePlot()
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
@@ -169,3 +160,4 @@ if __name__ == '__main__':
         widget.show()
         app.exec_()
 
+### --> UI LOOP END
