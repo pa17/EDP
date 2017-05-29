@@ -141,7 +141,5 @@ if __name__ == '__main__':
 
     widget.show()
     app.exec_()
-    app.deleteLater()
-    sys.exit()
 
 ### --> UI LOOP END
