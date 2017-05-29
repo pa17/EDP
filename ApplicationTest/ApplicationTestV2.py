@@ -75,7 +75,7 @@ def updatePlot():
     Volume += samplingperiod*VolFlowRead
 
     # Append to plot lists
-    dtList.append(samplingperiod)
+    dtList.append(samplingperiod/1000) # CONVERSION: ms to s
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
     VolList.append(Volume) 
