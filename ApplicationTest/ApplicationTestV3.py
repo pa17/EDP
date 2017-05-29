@@ -87,7 +87,7 @@ def updatePlot():
     #currVolFlow = VolFlowList[-1]
     #currWS = WSList[-1]
     
-    #return WSList, TimeList, TempList, VolList
+    return WSList, TimeList, TempList, VolList
     
     #QtGui.QApplication.processEvents()
 
@@ -125,6 +125,7 @@ class CustomWidget(QtGui.QWidget):
             enabled = True
         else:
             enabled = False
+            
     def ClassUpdatePlot(dummy):
         updatePlot()
         if ButtonFlag = "WS":
