@@ -105,7 +105,7 @@ class CustomWidget(QtGui.QWidget):
         self.ui.setupUi(self)
         
         # Connect to buttons
-        self.connect(self.pushButton SIGNAL("clicked()"), self.UpdateWSPlot)
+        self.connect(self.pushButton, SIGNAL("clicked()"), self.UpdateWSPlot)
         self.connect(self.pushButton_2, SIGNAL("clicked()"), self.UpdateVolFlowPlot)
         
         # access your UI elements through the `ui` attribute
