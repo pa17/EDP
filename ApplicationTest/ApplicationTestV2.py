@@ -126,7 +126,7 @@ class CustomWidget(QtGui.QWidget):
         else:
             enabled = False
             
-    def ClassUpdatePlot(dummy):
+    def ClassUpdatePlot(self):
         global ButtonFlag
         updatePlot()
         if ButtonFlag == "WS":
