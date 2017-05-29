@@ -133,6 +133,8 @@ class CustomWidget(QtGui.QWidget):
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
         elif ButtonFlag == "VolFlow":
             self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
+        elif ButtonFlag == "Vol":
+            self.ui.plotWidget.plot(TimeList, VolList, clear=True, title="Volume vs. time")
             
     def UpdateWSPlot(self):
         global ButtonFlag
@@ -141,6 +143,10 @@ class CustomWidget(QtGui.QWidget):
     def UpdateVolFlowPlot(self):
         global ButtonFlag
         ButtonFlag = "VolFlow"
+      
+    def UpdateVolPlot(self):
+        global ButtonFlag
+        ButtonFlag = "Vol"
 
 
 if __name__ == '__main__':
