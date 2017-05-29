@@ -75,7 +75,7 @@ def updatePlot():
     Volume += samplingperiod*VolFlowRead
 
     # Append to plot lists
-    dtList.append(samplingperiod/1000) # CONVERSION: ms to s
+    dtList.append(samplingperiod) 
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
     VolList.append(Volume) 
@@ -113,7 +113,7 @@ class CustomWidget(QtGui.QWidget):
         self.connect(self.ui.pushButton_3, SIGNAL("clicked()"), self.UpdateVolPlot)
         
         # access your UI elements through the `ui` attribute
-        #self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+        self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
         # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
