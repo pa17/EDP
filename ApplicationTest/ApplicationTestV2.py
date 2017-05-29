@@ -122,7 +122,7 @@ class CustomWidget(QtGui.QWidget):
             enabled = True
         else:
             enabled = False
-    def ClassUpdatePlot():
+    def ClassUpdatePlot(dummy):
         updatePlot()
             
     def UpdateWSPlot(self):
