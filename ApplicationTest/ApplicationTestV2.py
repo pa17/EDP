@@ -88,6 +88,8 @@ def updatePlot():
     #currWS = WSList[-1]
     
     #return WSList, TimeList, TempList, VolList
+    
+    QtGui.QApplication.processEvents()
 
 print ("Application Test V2")
 
