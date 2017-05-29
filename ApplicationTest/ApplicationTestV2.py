@@ -128,16 +128,16 @@ class CustomWidget(QtGui.QWidget):
             
     def ClassUpdatePlot(dummy):
         updatePlot()
-        if ButtonFlag == "WS":
+        if self.ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
-        elif ButtonFlag == "VolFlow":
+        elif self.ButtonFlag == "VolFlow":
             self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
             
     def UpdateWSPlot(self):
-        ButtonFlag = "WS"
+        self.ButtonFlag = "WS"
       
     def UpdateVolFlowPlot(self):
-        ButtonFlag = "VolFlow"
+        self.ButtonFlag = "VolFlow"
 
 
 if __name__ == '__main__':
