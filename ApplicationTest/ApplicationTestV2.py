@@ -126,11 +126,11 @@ class CustomWidget(QtGui.QWidget):
         updatePlot()
             
     def UpdateWSPlot(self):
-        #updatePlot()
+        updatePlot()
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
       
     def UpdateVolFlowPlot(self):
-        #updatePlot()
+        updatePlot()
         self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
 
 
