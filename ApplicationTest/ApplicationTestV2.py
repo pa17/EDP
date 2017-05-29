@@ -110,6 +110,7 @@ class CustomWidget(QtGui.QWidget):
         # Connect to buttons
         self.connect(self.ui.pushButton, SIGNAL("clicked()"), self.UpdateWSPlot)
         self.connect(self.ui.pushButton_2, SIGNAL("clicked()"), self.UpdateVolFlowPlot)
+        self.connect(self.ui.pushButton_3, SIGNAL("clicked()"), self.UpdateVolPlot)
         
         # access your UI elements through the `ui` attribute
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
