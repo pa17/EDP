@@ -25,7 +25,8 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList, Volume, VolList, TempList
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag
+ButtonFlag = ""
 Volume = 0
 dtList = []
 WSList = []
@@ -102,7 +103,6 @@ class CustomWidget(QtGui.QWidget):
     def __init__(self, parent=None):
         super(CustomWidget, self).__init__(parent=parent)
         
-        self.ButtonFlag = ButtonFlag
         # set up the form class as a `ui` attribute
         self.ui = Ui_CustomWidget()
         self.ui.setupUi(self)
@@ -127,6 +127,7 @@ class CustomWidget(QtGui.QWidget):
             enabled = False
             
     def ClassUpdatePlot(dummy):
+        global ButtonFlag
         updatePlot()
         if ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
@@ -134,9 +135,11 @@ class CustomWidget(QtGui.QWidget):
             self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
             
     def UpdateWSPlot(self):
+        global ButtonFlag
         ButtonFlag = "WS"
       
     def UpdateVolFlowPlot(self):
+        global ButtonFlag
         ButtonFlag = "VolFlow"
 
 
