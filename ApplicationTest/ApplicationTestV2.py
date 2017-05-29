@@ -103,10 +103,10 @@ class CustomWidget(QtGui.QWidget):
         # set up the form class as a `ui` attribute
         self.ui = Ui_CustomWidget()
         self.ui.setupUi(self)
-        
+      
         # Connect to buttons
-        self.connect(self.pushButton, SIGNAL("clicked()"), self.UpdateWSPlot)
-        self.connect(self.pushButton_2, SIGNAL("clicked()"), self.UpdateVolFlowPlot)
+        self.connect(self.ui.pushButton, SIGNAL("clicked()"), CustomWidget.UpdateWSPlot)
+        self.connect(self.ui.pushButton_2, SIGNAL("clicked()"), CustomWidget.UpdateVolFlowPlot)
         
         # access your UI elements through the `ui` attribute
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
@@ -130,6 +130,7 @@ class CustomWidget(QtGui.QWidget):
     def UpdateVolFlowPlot(self):
         updatePlot()
         self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
+
 
 if __name__ == '__main__':
 
