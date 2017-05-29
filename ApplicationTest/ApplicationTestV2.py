@@ -102,7 +102,7 @@ class CustomWidget(QtGui.QWidget):
     def __init__(self, parent=None):
         super(CustomWidget, self).__init__(parent=parent)
         
-        self.ButtonFlag = "WS"
+        self.ButtonFlag = ButtonFlag
         # set up the form class as a `ui` attribute
         self.ui = Ui_CustomWidget()
         self.ui.setupUi(self)
@@ -128,16 +128,16 @@ class CustomWidget(QtGui.QWidget):
             
     def ClassUpdatePlot(dummy):
         updatePlot()
-        if self.ButtonFlag == "WS":
+        if ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
-        elif self.ButtonFlag == "VolFlow":
+        elif ButtonFlag == "VolFlow":
             self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
             
     def UpdateWSPlot(self):
-        self.ButtonFlag = "WS"
+        ButtonFlag = "WS"
       
     def UpdateVolFlowPlot(self):
-        self.ButtonFlag = "VolFlow"
+        ButtonFlag = "VolFlow"
 
 
 if __name__ == '__main__':
