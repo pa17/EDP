@@ -89,7 +89,7 @@ def updatePlot():
     
     #return WSList, TimeList, TempList, VolList
     
-    QtGui.QApplication.processEvents()
+    #QtGui.QApplication.processEvents()
 
 print ("Application Test V2")
 
