@@ -113,7 +113,7 @@ class CustomWidget(QtGui.QWidget):
         self.connect(self.ui.pushButton_3, SIGNAL("clicked()"), self.UpdateVolPlot)
         
         # access your UI elements through the `ui` attribute
-        self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+        #self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
         # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
