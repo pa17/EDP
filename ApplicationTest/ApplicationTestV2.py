@@ -25,7 +25,8 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList
+global TimeList, WSList, Volume, VolList, TempList
+Volume = 0
 dtList = []
 WSList = []
 VolFlowList = []
@@ -66,17 +67,17 @@ def getValues():
     
 def updatePlot():
     
-    global TimeList, WSList
+    global TimeList, WSList, Volume, TempList, VolList
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    #Volume += samplingperiod*VolFlowRead
+    Volume += samplingperiod*VolFlowRead
 
     # Append to plot lists
     dtList.append(samplingperiod)
-    #TempList.append(TempRead)
-    #VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
-    #VolList.append(Volume) 
+    TempList.append(TempRead)
+    VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
+    VolList.append(Volume) 
     WSList.append(WSRead)
     # Sums of dt is time
     TimeList.append(sum(dtList))
@@ -85,12 +86,10 @@ def updatePlot():
     #currVolume = VolList[-1]
     #currVolFlow = VolFlowList[-1]
     #currWS = WSList[-1]
-
-    #pg.QtGui.QApplication.processEvents()
     
-    return WSList, TimeList
+    #return WSList, TimeList, TempList, VolList
 
-print ("Application Test")
+print ("Application Test V2")
 
 ### --> SETUP END
 
@@ -104,7 +103,11 @@ class CustomWidget(QtGui.QWidget):
         # set up the form class as a `ui` attribute
         self.ui = Ui_CustomWidget()
         self.ui.setupUi(self)
-
+        
+        # Connect to buttons
+        self.connect(self.pushButton SIGNAL("clicked()"), self.UpdateWSPlot)
+        self.connect(self.pushButton_2, SIGNAL("clicked()"), self.UpdateVolFlowPlot)
+        
         # access your UI elements through the `ui` attribute
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
@@ -120,9 +123,13 @@ class CustomWidget(QtGui.QWidget):
         else:
             enabled = False
             
-    def ClassUpdatePlot(self):
+    def UpdateWSPlot(self):
         updatePlot()
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+      
+    def UpdateVolFlowPlot(self):
+        updatePlot()
+        self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
 
 if __name__ == '__main__':
 
