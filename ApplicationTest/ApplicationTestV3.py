@@ -77,8 +77,8 @@ def updatePlot():
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    tic = millis()
     dt = tic - toc
+    tic = millis()
     Volume += (dt)*VolFlowRead
     toc = millis()
     # Append to plot lists
