@@ -25,7 +25,7 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, toc
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic
 ButtonFlag = ""
 Volume = 0
 dtList = []
@@ -34,8 +34,6 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-tic = 0
-toc = 0
 
 ## FUNCTIONS
 
@@ -73,14 +71,16 @@ def getValues():
     
 def updatePlot():
     
-    global TimeList, WSList, Volume, TempList, VolList, tic, toc
+    global TimeList, WSList, Volume, TempList, VolList, tic
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
-    # Integrate to find volume
-    dt = tic - toc
-    tic = millis()
-    Volume += (dt)*VolFlowRead
+    
+    # Integrate to find volume    
     toc = millis()
+    dt = (toc-tic)/1000 # Time increment in seconds
+    Volume += dt*VolFlowRead
+    tic = millis() # Measure time from here to toc again --> a complete cycle
+    
     # Append to plot lists
     dtList.append(dt) 
     TempList.append(TempRead)
@@ -100,6 +100,8 @@ def updatePlot():
     #QtGui.QApplication.processEvents()
 
 print ("Application Test V3")
+
+tic = millis() # Need one to start with
 
 ### --> SETUP END
 
