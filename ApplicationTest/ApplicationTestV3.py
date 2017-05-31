@@ -25,7 +25,7 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList, Volume, VolList, TempList, ButtonFlag
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic
 ButtonFlag = ""
 Volume = 0
 dtList = []
@@ -34,7 +34,7 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-global tic = 0
+tic = 0
 
 ## FUNCTIONS
 
