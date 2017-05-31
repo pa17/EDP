@@ -9,7 +9,7 @@ import time # Import time
 import Adafruit_ADS1x15 # Import the ADS1x15 module.
 import argparse
 # import the "form class" from your compiled UI
-from templateIter3 import Ui_CustomWidget
+from templateIter3 import Ui_SimpleButton
 
 ### SETUP
 
@@ -104,7 +104,7 @@ class CustomWidget(QtGui.QWidget):
         super(CustomWidget, self).__init__(parent=parent)
         
         # set up the form class as a `ui` attribute
-        self.ui = Ui_CustomWidget()
+        self.ui = Ui_SimpleButton()
         self.ui.setupUi(self)
       
         # Connect to buttons
