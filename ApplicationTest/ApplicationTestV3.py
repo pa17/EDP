@@ -34,6 +34,7 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
+tic = 0
 
 ## FUNCTIONS
 
@@ -75,8 +76,9 @@ def updatePlot():
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    Volume += samplingperiod*VolFlowRead
-
+    toc = millis()
+    Volume += (toc-tic)*VolFlowRead
+    tic = millis()
     # Append to plot lists
     dtList.append(samplingperiod) 
     TempList.append(TempRead)
