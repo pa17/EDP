@@ -34,7 +34,7 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-tic = 0
+global tic = 0
 
 ## FUNCTIONS
 
@@ -72,7 +72,7 @@ def getValues():
     
 def updatePlot():
     
-    global TimeList, WSList, Volume, TempList, VolList
+    global TimeList, WSList, Volume, TempList, VolList, tic
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
