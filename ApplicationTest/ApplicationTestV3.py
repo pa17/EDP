@@ -37,6 +37,9 @@ TimeList = []
 
 ## FUNCTIONS
 
+def millis():
+    return time.time() * 1000
+
 def getValues():
       
     # ADC readings
