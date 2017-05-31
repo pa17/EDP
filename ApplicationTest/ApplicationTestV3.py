@@ -92,7 +92,7 @@ def updatePlot():
     
     #QtGui.QApplication.processEvents()
 
-print ("Application Test V2")
+print ("Application Test V3")
 
 ### --> SETUP END
 
