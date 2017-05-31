@@ -25,7 +25,7 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, toc
 ButtonFlag = ""
 Volume = 0
 dtList = []
@@ -35,6 +35,7 @@ VolList = []
 TempList = []
 TimeList = []
 tic = 0
+toc = 0
 
 ## FUNCTIONS
 
@@ -72,14 +73,14 @@ def getValues():
     
 def updatePlot():
     
-    global TimeList, WSList, Volume, TempList, VolList, tic
+    global TimeList, WSList, Volume, TempList, VolList, tic, toc
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     # Integrate to find volume
-    toc = millis()
-    Volume += (tic-toc)*VolFlowRead
     tic = millis()
     dt = tic - toc
+    Volume += (dt)*VolFlowRead
+    toc = millis()
     # Append to plot lists
     dtList.append(dt) 
     TempList.append(TempRead)
