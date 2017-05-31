@@ -79,8 +79,9 @@ def updatePlot():
     toc = millis()
     Volume += (toc-tic)*VolFlowRead
     tic = millis()
+    dt = toc-tic
     # Append to plot lists
-    dtList.append(samplingperiod) 
+    dtList.append(dt) 
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
     VolList.append(Volume) 
