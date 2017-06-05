@@ -93,7 +93,7 @@ def updatePlot():
 
     # Important variables to return
     currVolume = VolList[-1] # Rounded to two decimals
-    breathVol = currVolume - InExhales[-1] # Take difference to have volume of each breath
+    breathVol = currVolume - round(InExhales[-1],2) # Take difference to have volume of each breath
     print "Breath"
     print breathVol
     print InExhales
