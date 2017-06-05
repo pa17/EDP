@@ -147,12 +147,12 @@ class CustomWidget(QtGui.QWidget):
             self.ui.plotWidget.setLabel('bottom', "Time", units='s')
 
         elif ButtonFlag == "VolFlow":
-            self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time")
+            self.ui.plotWidget.plot(TimeList, VolFlowList, clear=True, title="Volumetric Flow Rate vs. time",pen='b')
             self.ui.plotWidget.setLabel('left', "Volumetric Flow Rate", units='L/s')
             self.ui.plotWidget.setLabel('bottom', "Time", units='s')
             
         elif ButtonFlag == "Vol":
-            self.ui.plotWidget.plot(TimeList, VolList, clear=True, title="Volume vs. time")
+            self.ui.plotWidget.plot(TimeList, VolList, clear=True, title="Volume vs. time",pen='b')
             self.ui.plotWidget.setLabel('left', "Volume", units='L')
             self.ui.plotWidget.setLabel('bottom', "Time", units='s')
             
