@@ -12,7 +12,7 @@ import argparse
 from templateIter3 import Ui_SimpleButton
 
 ### SETUP
-pg.setConfigOption('background', 'None')
+pg.setConfigOption('background', None)
 ## ADC 
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
 # Gain for ADC
