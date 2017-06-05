@@ -173,7 +173,7 @@ if __name__ == '__main__':
 
     app = QtGui.QApplication([])
     widget = CustomWidget()
-
+    widget.setStyleSheet("Breeze {background: '#FFFFFF';}")
     widget.show()
     app.exec_()
 
