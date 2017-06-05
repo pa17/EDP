@@ -25,7 +25,7 @@ samplingfrequency = 120 # Hz
 samplingperiod = 1000 / samplingfrequency # In milliseconds
 zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
 # Initialise lists for subequent plotting
-global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, InExhales
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, InExhales, Breaths
 ButtonFlag = ""
 Volume = 0
 dtList = []
@@ -34,7 +34,8 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-InExhales = [0.0]
+InExhales = []
+Breaths = []
 
 ## FUNCTIONS
 
@@ -72,7 +73,7 @@ def getValues():
     
 def updatePlot():
     
-    global TimeList, WSList, Volume, TempList, VolList, tic, InExhales
+    global TimeList, WSList, Volume, TempList, VolList, tic, InExhales, Breaths
     # Get values from sensor
     VolFlowRead, WSRead, TempRead = getValues()
     
@@ -93,14 +94,11 @@ def updatePlot():
 
     # Important variables to return
     currVolume = VolList[-1] # Rounded to two decimals
-    breathVol = currVolume - round(InExhales[-1],2) # Take difference to have volume of each breath
-    print "Volume"
-    print currVolume
-    print "Breath"
-    print breathVol
-    if VolList.count(currVolume) > 20 and breathVol not in InExhales:
-        InExhales.append(breathVol)
-    print InExhales
+    if VolList.count(currVolume) > 20 and currVolume not in InExhales:
+        InExhales.append(currVolume)
+    if len(InExhales) > 1:
+        Breaths.append(InExhales[-1]-InExhales[-2])
+    print Breaths[-1]
     
     #return WSList, TimeList, TempList, VolList
     
