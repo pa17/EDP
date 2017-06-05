@@ -9,7 +9,7 @@ import time # Import time
 import Adafruit_ADS1x15 # Import the ADS1x15 module.
 import argparse
 # import the "form class" from your compiled UI
-from templateIter3 import Ui_SimpleButton
+from templateIter4 import Ui_SimpleButton
 
 ### SETUP
 pg.setConfigOption('background', None)
