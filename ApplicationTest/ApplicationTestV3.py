@@ -34,7 +34,7 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-InExhales = [0]
+InExhales = [0.0]
 
 ## FUNCTIONS
 
