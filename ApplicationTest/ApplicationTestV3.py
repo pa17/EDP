@@ -34,7 +34,7 @@ VolFlowList = []
 VolList = []
 TempList = []
 TimeList = []
-InExhales = []
+InExhales = [0]
 
 ## FUNCTIONS
 
@@ -94,6 +94,7 @@ def updatePlot():
     # Important variables to return
     currVolume = VolList[-1]
     if VolList.count(currVolume) > 10 and currVolume not in InExhales:
+        currVolume = currVolume - InExhales[-1] # Take difference to have volume of each breath
         InExhales.append(currVolume)
         print InExhales
     
