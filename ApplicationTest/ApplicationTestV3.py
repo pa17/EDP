@@ -100,7 +100,7 @@ def updatePlot():
     print breathVol
     if VolList.count(currVolume) > 20 and breathVol not in InExhales:
         InExhales.append(breathVol)
-        print InExhales
+    print InExhales
     
     #return WSList, TimeList, TempList, VolList
     
