@@ -144,7 +144,7 @@ class CustomWidget(QtGui.QWidget):
     def ClassUpdatePlot(self):
         global ButtonFlag
         updatePlot()
-        self.TVDisplay.setText(Breath[-1])
+        self.ui.TVDisplay.setText(Breath[-1])
       
         if ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
