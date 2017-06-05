@@ -1,30 +1,23 @@
 ## IMPORTS
 
-from PyQt4 import QtCore, QtGui # PyQt4
+from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-import sys
-import pyqtgraph as pg # Pyqtgraph
-import time # Import time
-import Adafruit_ADS1x15 # Import the ADS1x15 module.
-import argparse
-# import the "form class" from your compiled UI
+import sys, time, Adafruit_ADS1x15, argparse
+import pyqtgraph as pg
 from templateIter4 import Ui_SimpleButton
 
 ### SETUP
 pg.setConfigOption('background', None)
-## ADC 
 adc = Adafruit_ADS1x15.ADS1115() # Create an ADS1115 ADC (16-bit) instance. Connect TMP to A0 and RV to A1
-# Gain for ADC
 GAIN = 1
-# Read all the ADC channel values in a list.
 readValues = [0]*4
 
 ## VARIABLES
 samplingfrequency = 120 # Hz
-samplingperiod = 1000 / samplingfrequency # In milliseconds
-zeroWindAdjustment =  0.2 # Negative numbers yield smaller wind speeds and vice versa.
-# Initialise lists for subequent plotting
+samplingperiod = 1000 / samplingfrequency
+zeroWindAdjustment =  0.2
+
 global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, InExhales, Breaths
 ButtonFlag = ""
 Volume = 0
@@ -43,25 +36,19 @@ def millis():
     return time.time() * 1000
 
 def getValues():
-      
-    # ADC readings
+
     for i in range(4):
         readValues[i] = adc.read_adc(i, gain=GAIN)
         readValues[i] = readValues[i]*0.025568 # Values scaled to 10 bit so that Arduino code can be adapted
 
-    # Temp reading / RV reading
-    TMP_Therm_ADunits = readValues[0] # Temp termistor value from wind sensor
-    RV_Wind_ADunits = readValues[1] # RV output from wind sensor 
+    TMP_Therm_ADunits = readValues[0] 
+    RV_Wind_ADunits = readValues[1]
     RV_Wind_Volts = (RV_Wind_ADunits * 0.0048828125)
-    # Calculate temperature
     TempCtimes100 = (0.005*TMP_Therm_ADunits*TMP_Therm_ADunits) - 16.862*TMP_Therm_ADunits + 9075.4
-    # Calculate zero wind
     zeroWind_ADunits = -0.0006*TMP_Therm_ADunits*TMP_Therm_ADunits + 1.0727*TMP_Therm_ADunits + 47.172
-    # Zero wind adjustment
     zeroWind_Volts = (zeroWind_ADunits * 0.0048828125) - zeroWindAdjustment
 
-    # Wind speed in MPH
-    if (RV_Wind_Volts >= zeroWind_Volts): # Otherwise wind speed must be zero
+    if (RV_Wind_Volts >= zeroWind_Volts): 
         WindSpeed_MPH = pow((RV_Wind_Volts - zeroWind_Volts)/0.2300, 2.7265)
     else:
         WindSpeed_MPH = 0.0
@@ -74,25 +61,21 @@ def getValues():
 def updatePlot():
     
     global TimeList, WSList, Volume, TempList, VolList, tic, InExhales, Breaths
-    # Get values from sensor
+
     VolFlowRead, WSRead, TempRead = getValues()
-    
-    # Integrate to find volume    
+       
     toc = millis()
-    dt = (toc-tic)/1000 # Time increment in seconds
+    dt = (toc-tic)/1000 
     Volume += dt*VolFlowRead
     tic = millis() # Measure time from here to toc again --> a complete cycle
-    
-    # Append to plot lists
+
     dtList.append(dt) 
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
     VolList.append(round(Volume,2)) # Round it to two dec. for determining breath
     WSList.append(WSRead)
-    # Sums of dt is time
     TimeList.append(sum(dtList))
 
-    # Important variables to return
     currVolume = VolList[-1] # Rounded to two decimals
     if VolList.count(currVolume) > 20 and currVolume not in InExhales:
         InExhales.append(currVolume)
@@ -101,7 +84,7 @@ def updatePlot():
 
 print ("Application Test V3")
 
-tic = millis() # Need one to start with
+tic = millis()
 
 ### --> SETUP END
 
@@ -116,7 +99,6 @@ class CustomWidget(QtGui.QWidget):
         self.ui = Ui_SimpleButton()
         self.ui.setupUi(self)
       
-        # Connect to buttons
         self.connect(self.ui.pushButton, SIGNAL("clicked()"), self.UpdateWSPlot)
         self.connect(self.ui.pushButton_2, SIGNAL("clicked()"), self.UpdateVolFlowPlot)
         self.connect(self.ui.pushButton_3, SIGNAL("clicked()"), self.UpdateVolPlot)
@@ -124,7 +106,6 @@ class CustomWidget(QtGui.QWidget):
         # access your UI elements through the `ui` attribute
         self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
 
-        # simple demonstration of pure Qt widgets interacting with pyqtgraph
         self.ui.checkBox.stateChanged.connect(self.toggleMouse)
         self.timer = QTimer()
         self.timer.timeout.connect(self.ClassUpdatePlot)
