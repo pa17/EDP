@@ -91,9 +91,8 @@ def updatePlot():
     TimeList.append(sum(dtList))
 
     # Important variables to return
-    #currVolume = VolList[-1]
-    #currVolFlow = VolFlowList[-1]
-    #currWS = WSList[-1]
+    currVolume = VolList[-1]
+    print currVolume
     
     #return WSList, TimeList, TempList, VolList
     
