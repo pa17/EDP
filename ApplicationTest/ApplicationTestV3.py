@@ -142,7 +142,7 @@ class CustomWidget(QtGui.QWidget):
         self.ui.TVDisplay.setText(str(Breaths[-1]))
       
         if ButtonFlag == "WS":
-            self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time")
+            self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time",pen='r')
             self.ui.plotWidget.setLabel('left', "Flow speed", units='m/s')
             self.ui.plotWidget.setLabel('bottom', "Time", units='s')
 
