@@ -96,9 +96,9 @@ def updatePlot():
     breathVol = currVolume - InExhales[-1] # Take difference to have volume of each breath
     print "Breath"
     print breathVol
+    print InExhales
     if VolList.count(currVolume) > 10 and breathVol not in InExhales:
         InExhales.append(breathVol)
-        print InExhales
     
     #return WSList, TimeList, TempList, VolList
     
