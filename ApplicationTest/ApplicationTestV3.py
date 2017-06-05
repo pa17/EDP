@@ -86,7 +86,7 @@ def updatePlot():
     dtList.append(dt) 
     TempList.append(TempRead)
     VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
-    VolList.append(Volume) 
+    VolList.append(round(Volume,2)) # Round it to two dec. for determining breath
     WSList.append(WSRead)
     # Sums of dt is time
     TimeList.append(sum(dtList))
