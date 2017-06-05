@@ -98,11 +98,6 @@ def updatePlot():
         InExhales.append(currVolume)
     if len(InExhales) > 1:
         Breaths.append(InExhales[-1]-InExhales[-2])
-    print Breaths[-1]
-    
-    #return WSList, TimeList, TempList, VolList
-    
-    #QtGui.QApplication.processEvents()
 
 print ("Application Test V3")
 
