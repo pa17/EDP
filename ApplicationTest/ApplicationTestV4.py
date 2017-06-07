@@ -121,9 +121,9 @@ class CustomWidget(QtGui.QWidget):
         global ButtonFlag, Breaths, WSList, VolFlowList, VolList
         updatePlot()
         self.ui.TVDisplay.setText(str(Breaths[-1]))
-        self.ui.RVDisplay.setText(str(WSList[-1]))
-        self.ui.ERVDisplay.setText(str(VolFlowList[-1]))
-        self.ui.ICDisplay.setText(str(VolList[-1]))
+        self.ui.RVDisplay.setText(str(round(WSList[-1],2)))
+        self.ui.ERVDisplay.setText(str(round(VolFlowList[-1],2)))
+        self.ui.ICDisplay.setText(str(round(VolList[-1],2)))
       
         if ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time",pen='b')
