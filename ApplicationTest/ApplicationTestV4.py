@@ -54,9 +54,10 @@ def getValues():
         WindSpeed_MPH = 0.0
 
     WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704 #VER
+    BreathSpeed = WindSpeed_MetresPerSecond * 0.08260301783
     VolFlowRate = 6.931 * WindSpeed_MetresPerSecond #VER
     
-    return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
+    return VolFlowRate, BreathSpeed, (TempCtimes100/100)
     
 def updatePlot():
     
