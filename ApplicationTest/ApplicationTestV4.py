@@ -15,10 +15,10 @@ readValues = [0]*4
 
 ## VARIABLES
 samplingfrequency = 120 # Hz
-samplingperiod = 1000 / samplingfrequency
+samplingperiod = 1000 / samplingfrequency # ms
 zeroWindAdjustment =  0.2
 
-global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, InExhales, Breaths
+global TimeList, WSList, Volume, VolList, TempList, ButtonFlag, tic, InExhales, Breaths, VolFlowList
 ButtonFlag = ""
 Volume = 0
 dtList = []
@@ -53,14 +53,14 @@ def getValues():
     else:
         WindSpeed_MPH = 0.0
 
-    WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704
-    VolFlowRate = 6.931 * WindSpeed_MetresPerSecond
+    WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704 #VER
+    VolFlowRate = 6.931 * WindSpeed_MetresPerSecond #VER
     
     return VolFlowRate, WindSpeed_MetresPerSecond, (TempCtimes100/100)
     
 def updatePlot():
     
-    global TimeList, WSList, Volume, TempList, VolList, tic, InExhales, Breaths
+    global TimeList, WSList, Volume, TempList, VolList, tic, InExhales, Breaths, VolFlowList
 
     VolFlowRead, WSRead, TempRead = getValues()
        
@@ -118,9 +118,12 @@ class CustomWidget(QtGui.QWidget):
             enabled = False
             
     def ClassUpdatePlot(self):
-        global ButtonFlag, Breaths
+        global ButtonFlag, Breaths, WSList, VolFlowList, VolList
         updatePlot()
         self.ui.TVDisplay.setText(str(Breaths[-1]))
+        self.ui.RVDisplay.setText(str(WSList[-1]))
+        self.ui.ERVDisplay.setText(str(VolFlowList[-1]))
+        self.ui.ICDisplay.setText(str(VolList[-1]))
       
         if ButtonFlag == "WS":
             self.ui.plotWidget.plot(TimeList, WSList, clear=True, title="Breath speed vs. time",pen='b')
