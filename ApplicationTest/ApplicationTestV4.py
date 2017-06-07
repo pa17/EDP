@@ -55,7 +55,7 @@ def getValues():
 
     WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704 #VER
     BreathSpeed = WindSpeed_MetresPerSecond * 0.08260301783
-    VolFlowRate = 0.5725552611 * BreathSpeed # In L / s
+    VolFlowRate = 0.5725552611 * BreathSpeed # In L/s
     
     return VolFlowRate, BreathSpeed, (TempCtimes100/100)
     
