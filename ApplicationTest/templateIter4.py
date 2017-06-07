@@ -178,8 +178,7 @@ class Ui_SimpleButton(object):
         self.TVLabel.setFont(font)
         self.TVLabel.setObjectName(_fromUtf8("TVLabel"))
         self.verticalLayout_3.addWidget(self.TVLabel)
-        self.
-        Label = QtGui.QLabel(self.horizontalLayoutWidget)
+        self.Label = QtGui.QLabel(self.horizontalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(8)
         self.RVLabel.setFont(font)
