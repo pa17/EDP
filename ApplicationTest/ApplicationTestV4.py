@@ -55,7 +55,7 @@ def getValues():
 
     WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704 #VER
     BreathSpeed = WindSpeed_MetresPerSecond * 0.08260301783
-    VolFlowRate = 6.931 * WindSpeed_MetresPerSecond #VER
+    VolFlowRate = 0.5725552611 * BreathSpeed # In L / s
     
     return VolFlowRate, BreathSpeed, (TempCtimes100/100)
     
@@ -72,7 +72,7 @@ def updatePlot():
 
     dtList.append(dt) 
     TempList.append(TempRead)
-    VolFlowList.append(VolFlowRead*1000) # CONVERSION: m^3/s to L/s
+    VolFlowList.append(VolFlowRead)
     VolList.append(round(Volume,2)) # Round it to two dec. for determining breath
     WSList.append(WSRead)
     TimeList.append(sum(dtList))
