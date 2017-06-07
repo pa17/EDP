@@ -78,7 +78,7 @@ def updatePlot():
     TimeList.append(sum(dtList))
 
     currVolume = VolList[-1] # Rounded to two decimals
-    if VolList.count(currVolume) > 20 and currVolume not in InExhales:
+    if VolList.count(currVolume) > 8 and currVolume not in InExhales:
         InExhales.append(currVolume)
     if len(InExhales) > 1:
         Breaths.append(InExhales[-1]-InExhales[-2])
