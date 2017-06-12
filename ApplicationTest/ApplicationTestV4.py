@@ -83,7 +83,7 @@ def updatePlot():
     if len(InExhales) > 1:
         Breaths.append(InExhales[-1]-InExhales[-2])
 
-print ("Application Test V3")
+print ("Application Test V4")
 
 tic = millis()
 
