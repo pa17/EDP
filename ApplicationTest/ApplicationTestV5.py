@@ -54,6 +54,7 @@ def getValues():
         WindSpeed_MPH = 0.0
 
     WindSpeed_MetresPerSecond = WindSpeed_MPH * 0.44704 * 4.2 #VER, Calibration Scaled
+    WindSpeed_MetresPerSecond = -0.0513*WindSpeed_MetresPerSecond + 1.2451 # Linear Calibration
     BreathSpeed = WindSpeed_MetresPerSecond * 0.08260301783
     VolFlowRate = 0.5725552611 * BreathSpeed # In L/s
     return VolFlowRate, BreathSpeed, (TempCtimes100/100)
