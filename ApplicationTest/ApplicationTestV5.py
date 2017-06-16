@@ -58,7 +58,7 @@ def getValues():
     BreathSpeed = WindSpeed_MetresPerSecond * 0.08260301783
     VolFlowRate = 0.5725552611 * BreathSpeed # In L/s
     print VolFlowRate
-    ScalingFactor = -0.051*VolFlowRate+1.2
+    ScalingFactor = -14.9732*VolFlowRate+1.6346
     print ScalingFactor
     VolFlowRate = ScalingFactor*VolFlowRate
     return VolFlowRate, BreathSpeed, (TempCtimes100/100)
